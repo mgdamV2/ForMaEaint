@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en"
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> For Ma Eaint </title>
+<style> 
+
+/* General Styles */
+
+    body {
+      margin: 0;
+      padding: 0;
+      
+   font-family: 'Dancing Script', cursive;
+    
+    
+     background-image: url('/images/theme.jpg');
+     
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    
+    }
+
+    /* Flying Hearts & Dust Effect */
+    .heart {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      font-size: 30px;
+      animation: floatHearts 10s infinite ease-in-out;
+    }
+
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 30%; animation-delay: 2s; }
+    .heart:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .heart:nth-child(4) { left: 70%; animation-delay: 6s; }
+    .heart:nth-child(5) { left: 90%; animation-delay: 8s; }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(150vh) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50vh) rotate(180deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-150vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Fire Dust Animation */
+    @keyframes fireDust {
+      0% {
+        transform: scale(1) translateY(0);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.2) translateY(50px);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1) translateY(100px);
+        opacity: 0;
+      }
+    }
+
+    .fire-dust {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff02ce;
+      border-radius: 50%;
+      animation: fireDust 2s infinite ease-in-out;
+      opacity: 0.5;
+    }
+
+    .fire-dust:nth-child(odd) {
+      animation-duration: 2.5s;
+    }
+
+    .fire-dust:nth-child(even) {
+      animation-duration: 3s;
+    }
+
+    /* Romantic Intro Text */
+    .intro-text {
+      font-size: 1.3rem;
+      color: #FF02CE;
+      text-align: center;
+      font-weight: bold; 
+      text-shadow: 1px 1px 1px rgba(1, 0, 0, 0.5);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Dialog Box */
+    .dialog {
+      position: fixed;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 20;
+      display: none; /* Initially hidden */
+      width: 300px;
+      height: 300px;
+      flex-direction: column;
+      justify-content: center; /* Center the content vertically */
+      align-items: center; /* Center the content horizontally */
+    }
+
+    .dialog h2 {
+      margin: 0 0 20px;
+      font-size: 1.5rem;
+      color: #ff6f91;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow */
+    }
+
+    .dialog select,
+    .dialog button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      width: 80%; /* Ensures the buttons and selects take most of the space */
+    }
+
+    /* Error Text */
+    .error-text {
+      color: red;
+      margin-top: 10px;
+      display: none;
+      font-weight: bold; /* Make error text bold */
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Add shadow to error text */
+     
+    }
+    
+  /* Thank You Message */
+    .thank-you-message {
+      font-size: 2.5rem;
+      color: #7E0066;
+      text-align: center;
+      display: none;
+      font-weight: bold; 
+      text-shadow: 1px 1px 3px rgba(1, 0, 0, 0.5);
+    }
+
+ /* Message After Thank */
+    .message-after-thank {
+      font-size: 1.5rem;
+      color: #004F7E;
+      text-align: center;
+      display: none;
+      font-weight: bold; 
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .read-more {
+      position: absolute;
+      bottom: 83px;
+      right: 60px;
+      font-size: 1.5rem;
+      color: #ff6f91;
+      text-decoration: none;
+      display: none;
+      font-weight: bold; 
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+
+    /* Arrows */
+    .arrows {
+      position: absolute;
+      bottom: 60px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      display: none;
+    }
+
+    .arrow {
+      width: 30px;
+      height: 20px;
+      border: solid #ff6f91;
+      border-width: 2px 2px 0 0;
+      transform: rotate(45deg);
+    }
+
+    @keyframes forwardBackward {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(10px);
+      }
+    }
+
+    .arrows {
+      animation: forwardBackward 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hearts Animation -->
+  <div class="hearts">
+    <div class="heart">💖</div>
+    <div class="heart">💗</div>
+    <div class="heart">💕</div>
+    <div class="heart">💖</div>
+    <div class="heart">💗</div>
+  </div>
+
+  <!-- Fire Dust Effect -->
+  <div class="fire-dust" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+  <div class="fire-dust" style="top: 30%; left: 30%; animation-delay: 1s;"></div>
+  <div class="fire-dust" style="top: 50%; left: 50%; animation-delay: 2s;"></div>
+  <div class="fire-dust" style="top: 70%; left: 70%; animation-delay: 3s;"></div>
+  <div class="fire-dust" style="top: 90%; left: 90%; animation-delay: 4s;"></div>
+
+  <!-- Romantic Intro Text -->
+  <div class="intro-text" id="introText">
+  "---I've to ask you something, Ma Eaint---" 😼💐
+  </div>
+
+  <!-- Dialog -->
+  <div class="dialog" id="dateDialog">
+    <h2>The First Day When We fall in Love</h2>
+    <select id="month">
+      <option value="" disabled selected>month</option>
+      <script>
+        for (let i = 1; i <= 12; i++) {
+          document.write(`<option value="${i}">${String(i).padStart(2, '0')}</option>`);
+        }
+      </script>
+    </select>
+    <select id="day">
+      <option value="" disabled selected>day</option>
+      <script>
+        for (let i = 1; i <= 31; i++) {
+          document.write(`<option value="${i}">${String(i).padStart(2, '0')}</option>`);
+        }
+      </script>
+    </select>
+    <select id="year">
+      <option value="" disabled selected>year</option>
+      <script>
+        for (let i = 2020; i <= 2025; i++) {
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select>
+    <button onclick="validateDate()">Continue</button>
+    <p class="error-text" id="errorText"> Try again🎀 </p>
+  </div>
+
+
+  <!-- Thank You Message -->
+  <div class="thank-you-message" id="thankYouMessage">
+    Thank you for still remembering 🎀😭
+  </div>
+  
+  <!-- Message After Thank -->
+  <div class="message-after-thank"
+  id="MessageAfterThank">
+    Look at the right bottom 
+        
+
+  </div>
+
+  <!-- Read More Button -->
+  <a href="https://t.me/+7EWUu_2ZNL5lOTg9" class="read-more" id="readMore">Read More</a>
+
+  <!-- Arrows -->
+  <div class="arrows" id="arrows">
+    <div class="arrow"></div>
+    <div class="arrow"></div>
+    <div class="arrow"></div>
+  </div>
+
+  <script>
+    const correctDate = { month: "4", day: "7", year: "2024" };
+
+    // Hide intro text and show dialog after 5 seconds
+    setTimeout(() => {
+      document.getElementById("introText").style.display = "none";
+      document.getElementById("dateDialog").style.display = "block";
+    }, 5000);
+
+    function validateDate() {
+      const month = document.getElementById("month").value;
+      const day = document.getElementById("day").value;
+      const year = document.getElementById("year").value;
+
+      const errorText = document.getElementById("errorText");
+
+      if (month === correctDate.month && day === correctDate.day && year === correctDate.year) {
+        document.getElementById("dateDialog").style.display = "none";
+        document.getElementById("thankYouMessage").style.display = "block";        
+        document.getElementById ("MessageAfterThank"
+          ).style.display = "none";
+          
+
+        setTimeout(() => {
+          document.getElementById("thankYouMessage").style.display = "flex";
+          
+          document.getElementById("readMore").style.display = "block";
+   
+           document.getElementById("arrows").style.display = "flex";
+          
+           setTimeout (() => { document.getElementById("thankYouMessage").style.display = "none"; 
+           
+           document.getElementById ("MessageAfterThank"
+          ).style.display = "flex";
+         }, 500);
+         
+        }, 3000);
+        
+      
+
+      } else {
+        errorText.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
